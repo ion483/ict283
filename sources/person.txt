@@ -1,0 +1,7 @@
+name,amount,cent,currency
+Jane,30,cents,AU$
+Brown,20,cents,US$
+Charlie,50,cents,EUR
+Jane,10,cents,AU$
+Brown,11,cents,AU$
+Charlie,40,cents,US$

@@ -1,0 +1,28 @@
+Student ID:  111555
+Semester:    962
+  Unit Name: Data abstraction
+  Unit ID:   ICT283
+  Credits:   3
+  Marks:     90
+  Date:      05 June 2020
+
+  Unit Name: MUS 1100
+  Unit ID:   ICT201
+  Credits:   1
+  Marks:     97
+  Date:      25 September 2024
+
+  Unit Name: BIO 1040
+  Unit ID:   ICT285
+  Credits:   4
+  Marks:     95
+  Date:      10 November 2015
+
+  Unit Name: Database coding
+  Unit ID:   ICT333
+  Credits:   3
+  Marks:     85
+  Date:      08 March 2025
+
+Number of units = 4
+Total credits   = 11

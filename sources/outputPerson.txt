@@ -1,0 +1,3 @@
+Jane,AU$,40
+Brown,AU$,11,US$,20
+Charlie,US$,40,EUR,50

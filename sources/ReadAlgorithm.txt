@@ -1,0 +1,45 @@
+readCSV()
+    Open the primary data source file
+    IF the primary file cannot be found THEN
+        Display "File not found" and EXIT
+    ENDIF
+
+    WHILE there are more source file names to read from the primary file
+        Get the next source file name
+        Append the correct folder path prefix based on the primary file name
+
+        Open the individual source data file
+        Read the first line (the Header row)
+        
+        Split the Header row by commas and store in a temporary list
+        Identify the column positions (Index) for Date, Speed, Temperature, and Radiation
+
+        WHILE there are more data rows in the source file
+            Read the next data row
+            Split the row by commas into a list of cell values
+
+            IF a date exists at the identified date position THEN
+                Extract Year, Month, Day, Hour, and Minute
+                IF the format is valid AND the values are logically correct THEN
+                    Create a new Data Record and set its Date and Time
+                ELSE
+                    SKIP to the next row
+                ENDIF
+            ELSE
+                SKIP to the next row
+            ENDIF
+
+            FOR EACH identified column (Speed, Temperature, Radiation)
+                IF the cell is not empty THEN
+                    Convert the text value to a decimal number
+                    Update the corresponding field in the Record
+                ENDIF
+            ENDFOR
+
+            Add the completed Record to the main data collection
+            Increment the total record count
+        ENDWHILE
+    ENDWHILE
+
+    Display the total number of successfully loaded records
+END readCSV

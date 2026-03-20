@@ -1,0 +1,14 @@
+Main()
+    open read infile = "rinput.txt"
+    
+    IF infile has errors THEN
+        return error code and exit
+    ENDIF 
+
+    Declare Registration R
+    read from infile to R
+
+    open write outfile = "routput.txt"
+    write to outfile from R
+
+End Main()

@@ -1,0 +1,86 @@
+calculateMean(values)
+    IF values is empty THEN
+        RETURN undefined
+    ENDIF
+
+    Set sum to 0.0
+    FOR EACH value IN values
+        sum = sum + value
+    ENDFOR
+
+    RETURN sum / count of elements in values
+END calculateMean
+
+
+calculateMedian(values)
+    IF values is empty THEN
+        RETURN undefined
+    ENDIF
+
+    Set sortedValues to a copy of values sorted in ascending order
+    Set size to count of elements in sortedValues
+
+    IF size is even THEN
+        Set middleRight to element at position (size / 2)
+        Set middleLeft to element at position (middleRight - 1)
+        RETURN (middleLeft + middleRight) / 2
+    ELSE
+        RETURN element at middle position (floor of size / 2)
+    ENDIF
+END calculateMedian
+
+
+calculateSampleStdDev(values, mean)
+    IF count of elements in values < 2 OR mean is undefined THEN
+        RETURN undefined
+    ENDIF
+
+    Set sumOfSquaredDifferences to 0.0
+    FOR EACH value IN values
+        Set difference = value - mean
+        sumOfSquaredDifferences = sumOfSquaredDifferences + (difference * difference)
+    ENDFOR
+
+    Set variance = sumOfSquaredDifferences / (count of elements - 1)
+    RETURN square root of variance
+END calculateSampleStdDev
+
+
+calculatesPCC(x, y)
+    Set n to count of elements in x
+    IF count of y is not equal to n OR n < 2 THEN
+        RETURN undefined
+    ENDIF
+
+    Calculate average of x and average of y
+    Set sumProductDiff, sumSqDiffX, sumSqDiffY to 0.0
+
+    FOR EACH index i from 0 to n-1
+        Set diffX = x[i] - averageX
+        Set diffY = y[i] - averageY
+        sumProductDiff = sumProductDiff + (diffX * diffY)
+        sumSqDiffX = sumSqDiffX + (diffX * diffX)
+        sumSqDiffY = sumSqDiffY + (diffY * diffY)
+    ENDFOR
+
+    IF sumSqDiffX is 0 OR sumSqDiffY is 0 THEN
+        RETURN undefined
+    ENDIF
+
+    RETURN sumProductDiff / square root of (sumSqDiffX * sumSqDiffY)
+END calculatesPCC
+
+
+calculateMAD(v, median)
+    IF v is empty OR median is undefined THEN
+        RETURN undefined
+    ENDIF
+
+    Set sumOfAbsoluteDifferences to 0.0
+    FOR EACH value IN v
+        Set absDiff = absolute value of (value - median)
+        sumOfAbsoluteDifferences = sumOfAbsoluteDifferences + absDiff
+    ENDFOR
+
+    RETURN sumOfAbsoluteDifferences / count of elements in v
+END calculateMAD

@@ -1,0 +1,151 @@
+push_back(newValue)
+    IF currentSize equals capacity THEN
+        Set newCapacity to (capacity * 2)
+        IF capacity is 0 THEN
+            Set newCapacity to 1
+        ENDIF
+        CALL resize(newCapacity)
+    ENDIF
+
+    Store newValue at the end of the data collection
+    Increment currentSize by 1
+END push_back
+
+
+insert(newValue, index)
+    IF index is invalid (less than 0 or greater than currentSize) THEN
+        RETURN error (Out of Range)
+    ENDIF
+
+    IF currentSize equals capacity THEN
+        Set newCapacity to (capacity * 2)
+        IF capacity is 0 THEN
+            Set newCapacity to 1
+        ENDIF
+        CALL resize(newCapacity)
+    ENDIF
+
+    FOR EACH position i from currentSize down to index + 1
+        Shift element at (i - 1) to position i
+    ENDFOR
+
+    Store newValue at position index
+    Increment currentSize by 1
+END insert
+
+
+resize(newCapacity)
+    Create a new data container with size newCapacity
+    
+    FOR EACH index from 0 to currentSize - 1
+        Copy element from old container to new container
+    ENDFOR
+
+    Release the memory used by the old container
+    Point data container to the new container
+    Set capacity to newCapacity
+END resize
+
+
+deleteAt(index)
+    IF index is less than 0 OR index is greater than or equal to currentSize THEN
+        RETURN error (Index Out of Range)
+    ENDIF
+
+    FOR EACH position i starting from the target index up to (currentSize - 2)
+        Set element at position i to the value of the element at position (i + 1)
+    ENDFOR
+
+    Reset the last element in the container to a default value
+    Decrease currentSize by 1
+END deleteAt
+
+
+deleteElement(targetValue)
+    Set targetIndex to -1
+    
+    FOR EACH index from 0 to currentSize - 1
+        IF element at index matches targetValue THEN
+            Set targetIndex to current index
+        ENDIF
+    ENDFOR
+
+    IF targetIndex is -1 THEN
+        RETURN error (Element not found)
+    ELSE
+        CALL deleteAt(targetIndex)
+    ENDIF
+END deleteElement
+
+
+Vector_CopyConstructor(otherVector)
+    Set currentSize to size of otherVector
+    Set capacity to capacity of otherVector
+    
+    IF capacity is greater than 0 THEN
+        Create a new container of size capacity
+        IF currentSize is greater than 0 THEN
+            FOR EACH index from 0 to currentSize - 1
+                Copy element from otherVector at current index to new container
+            ENDFOR
+        ENDIF
+    ENDIF
+END Vector_CopyConstructor
+
+
+Vector_ParameterizedConstructor(newCapacity, defaultValue)
+    Set currentSize to newCapacity
+    Set capacity to newCapacity
+    
+    IF capacity is greater than 0 THEN
+        Create a new container of size capacity
+        FOR EACH index from 0 to currentSize - 1
+            Store defaultValue in container at current index
+        ENDFOR
+    ENDIF
+END Vector_ParameterizedConstructor
+
+
+Vector_Assignment(otherVector)
+    IF otherVector is the same object as this THEN
+        RETURN error (Cannot assign to itself)
+    ENDIF
+
+    Set currentSize to size of otherVector
+    Set capacity to capacity of otherVector
+    
+    Release the memory used by the current container
+    Create a new container of size currentSize
+    
+    FOR EACH index from 0 to currentSize - 1
+        Copy element from otherVector at current index to new container
+    ENDFOR
+    
+    RETURN this updated vector
+END Vector_Assignment
+
+
+ALGORITHM AccessElement(index)
+    IF index is less than 0 OR index is greater than or equal to currentSize THEN
+        RETURN error (Index Out of Range)
+    ENDIF
+
+    RETURN the element stored at the specified index position
+END AccessElement
+
+
+clear()
+    Release the memory used by the current container
+    Set currentSize to 0
+    Set capacity to 0
+    Set data pointer to null
+END clear
+
+
+isEmpty()
+    IF currentSize is 0 THEN
+        RETURN true
+    ELSE
+        RETURN false
+    ENDIF
+END isEmpty
