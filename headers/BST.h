@@ -144,18 +144,6 @@ class BST{
          * @return An int as the size
          */
         int size() const;
-
-        /**
-         * @brief Retrieves the height of the current tree
-         * @return An int as the height
-         */
-        int height() const;
-
-        /**
-         * @brief Checks if the current bst is balanced
-         * @return True if the current bst is balanced, false otherwise
-         */
-        bool isBalanced() const;
     
     private:
 
@@ -204,20 +192,6 @@ class BST{
          * @return A Node pointer to the new copied node
          */
         Node* copyTree(const Node* node) const;
-
-        /**
-         * @brief Helper function to get the height of a node
-         * @param node The starting node
-         * @return Height as an int
-         */
-        int heightHelper(const Node* node) const;
-
-        /**
-         * @brief Helper function checks if a node is balanced
-         * @param node The starting node
-         * @return True if the node is balanaced, false otherwise
-         */
-        bool balanceChecker(const Node* node) const;
 
         /**
          * @brief Helper function inserts a new element into the bst
@@ -490,35 +464,6 @@ void BST<B>::inOrderTraversalCollectHelper(const Node* node, Collection<B>& c, v
     inOrderTraversalCollectHelper(node->left, c, funcPtr);
     (c.*funcPtr)(node->data);
     inOrderTraversalCollectHelper(node->right, c, funcPtr);
-}
-
-template <class B>
-int BST<B>::height() const{
-    return heightHelper(root);
-}
-
-template <class B>
-int BST<B>::heightHelper(const Node* node) const{
-    Utility u;
-    if(node == nullptr) return 0;
-    int leftHeight = heightHelper(node->left);
-    int rightHeight = heightHelper(node->right);
-    return 1 + u.max(leftHeight, rightHeight);
-}
-
-template <class B>
-bool BST<B>::isBalanced() const{
-    bool isBalanced = balanceChecker(root);
-    return isBalanced;
-}
-
-template <class B>
-bool BST<B>::balanceChecker(const Node* node) const{
-    if(node == nullptr) return true;
-    int leftHeight = heightHelper(node->left);
-    int rightHeight = heightHelper(node->right);
-    if(std::abs(leftHeight-rightHeight) > 1) return false;
-    return balanceChecker(node->left) && balanceChecker(node->right);
 }
 
 template <class B>

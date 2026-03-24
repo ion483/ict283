@@ -3,8 +3,11 @@
 
 #include "Vector.h"
 #include "Date.h"
+#include "DateIO.h"
 #include "Time_1.h"
+#include "Time_1IO.h"
 #include "WindRecType.h"
+#include "WindRecTypeIO.h"
 #include "BST.h"
 #include "Map.h"
 #include "Calculation.h"

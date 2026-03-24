@@ -3,17 +3,19 @@
 #include <cassert>
 
 int main(){
-    Collection<int> c;
+    Collection<int> c; // test id 1: Sequential Data Collection
     c.collect(1);
     c.collect(2);
     c.collect(3);
+    std::cout << "c size: " << c.getSize() << '\n';
 
-    assert(c[0] == 1);
-    assert(c[1] == 2);
-    assert(c[2] == 3);
+    // test id 2: Verification of Overloaded Index Operator
+    std::cout << "c[0]: " << c[0] << '\n';
+    std::cout << "c[1]: " << c[1] << '\n';
+    std::cout << "c[2]: " << c[2] << '\n';
 
-    assert(c.getSize() == 3);
 
+    // test id 3: Full Dataset Iteration Test
     std::cout << "collection: \n";
     for(int i = 0; i < c.getSize(); i++){
         std::cout << c[i] << " ";

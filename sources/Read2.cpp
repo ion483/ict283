@@ -5,9 +5,19 @@ Read2::Read2(const std::string& fName, Map<int, Map<int, BST<WindRecType>>>& dMa
 void Read2::readCSV(){
     int size = 0;
     std::ifstream ifs(fileName);
+    std::cout << "input file name: " << fileName << '\n';
+    if(!ifs){
+        std::cout << "File not found\n";
+        return;
+    }
     std::string sourceFileName;
     while(std::getline(ifs, sourceFileName)){
-        sourceFileName.insert(0, "data_source/");
+        if(fileName == "Data_source.txt"){
+            sourceFileName.insert(0, "data_source/");
+        }else if(fileName == "TestData_source.txt"){
+            sourceFileName.insert(0, "test_source/");
+        }//create ifs from source file name
+   
         std::ifstream sifs(sourceFileName);
         std::string headerStr;
         std::getline(sifs, headerStr);
@@ -35,10 +45,11 @@ void Read2::readCSV(){
                 entryV.Insert(entryCell, entryV.GetSize());
             }
             std::string dateStr, wsStr, tempStr, srStr;
-            dateStr = entryV[dateIdx];
-            wsStr = entryV[wsIdx];
-            tempStr = entryV[tempIdx];
-            srStr = entryV[srIdx];
+            if (dateIdx != -1 && dateIdx < entryV.GetSize()) dateStr = entryV[dateIdx];
+            if (wsIdx != -1   && wsIdx < entryV.GetSize())   wsStr   = entryV[wsIdx];
+            if (tempIdx != -1 && tempIdx < entryV.GetSize()) tempStr = entryV[tempIdx];
+            if (srIdx != -1   && srIdx < entryV.GetSize())   srStr   = entryV[srIdx];
+
 
             WindRecType w;
 
@@ -92,10 +103,17 @@ void Read2::readCSV(){
             d.getMonth(month);
 
             dataMap[year][month].insert(w);
-            dataMap[year][month].balanceItSelf();
-            /*need to balance the updated bst of current entry year and month*/
             size++;
         }
     }
+    
+    for(std::map<int, Map<int, BST<WindRecType>>>::iterator itYear = dataMap.begin(); itYear != dataMap.end(); ++itYear){
+        Map<int, BST<WindRecType>>& monthMap = itYear -> second;
+        for(std::map<int, BST<WindRecType>>::iterator itMonth = monthMap.begin(); itMonth != monthMap.end(); ++itMonth){
+            BST<WindRecType>& monthBST = itMonth -> second;
+            monthBST.balanceItSelf();
+        }      
+    }
+
     std::cout << "Data successfully loaded with: " << size << " data\n";
 }

@@ -23,7 +23,7 @@
  */
 class Read2{
     private:
-        const std::string& fileName; /**< The file name in string*/
+        const std::string fileName; /**< The file name in string*/
         Map<int, Map<int, BST<WindRecType>>>& dataMap; /**< The reference to the input map*/
     public:
 
